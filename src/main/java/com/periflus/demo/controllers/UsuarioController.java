@@ -1,5 +1,6 @@
 package com.periflus.demo.controllers;
 
+import com.periflus.demo.dao.UsuarioDao;
 import com.periflus.demo.models.Usuario;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ public class UsuarioController {
         Usuario usuario=new Usuario();
         usuario.setId(id);
         usuario.setNombre("Lucas");
-        usuario.setApellidos("Moy");
+        usuario.setApellido("Moy");
         usuario.setEmail("lucasmoy@hotmail.com");
         usuario.setTelefono("234234234");
         return usuario;
@@ -25,7 +26,7 @@ public class UsuarioController {
         Usuario usuario=new Usuario();
         usuario.setId(1L);
         usuario.setNombre("Lucas");
-        usuario.setApellidos("Moy");
+        usuario.setApellido("Moy");
         usuario.setEmail("lucasmoy@hotmail.com");
         usuario.setTelefono("234234234");
         usuarios.add(usuario);
@@ -33,7 +34,7 @@ public class UsuarioController {
         usuario=new Usuario();
         usuario.setId(2L);
         usuario.setNombre("Lucas2");
-        usuario.setApellidos("Moy2");
+        usuario.setApellido("Moy2");
         usuario.setEmail("lucasmoy2@hotmail.com");
         usuario.setTelefono("12");
         usuarios.add(usuario);
@@ -41,7 +42,7 @@ public class UsuarioController {
         usuario=new Usuario();
         usuario.setId(3L);
         usuario.setNombre("Lucas3");
-        usuario.setApellidos("Moy3");
+        usuario.setApellido("Moy3");
         usuario.setEmail("lucasmoy3@hotmail.com");
         usuario.setTelefono("23");
         usuarios.add(usuario);
