@@ -2,15 +2,16 @@ package com.periflus.demo.controllers;
 
 import com.periflus.demo.dao.UsuarioDao;
 import com.periflus.demo.models.Usuario;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 @RestController
 public class UsuarioController {
-    @RequestMapping(value="usuario/{id}")
+    @Autowired
+    private UsuarioDao usuarioDao;
+    @RequestMapping(value="api/usuario/{id}", method = RequestMethod.DELETE)
     public Usuario getUsuario(@PathVariable Long id){
         Usuario usuario=new Usuario();
         usuario.setId(id);
@@ -20,33 +21,20 @@ public class UsuarioController {
         usuario.setTelefono("234234234");
         return usuario;
     }
-    @RequestMapping(value="usuarios")
+    @RequestMapping(value="api/usuarios",method= RequestMethod.GET )
     public List<Usuario> getUsuarios(){
-        List<Usuario> usuarios=new ArrayList<>();
-        Usuario usuario=new Usuario();
-        usuario.setId(1L);
-        usuario.setNombre("Lucas");
-        usuario.setApellido("Moy");
-        usuario.setEmail("lucasmoy@hotmail.com");
-        usuario.setTelefono("234234234");
-        usuarios.add(usuario);
 
-        usuario=new Usuario();
-        usuario.setId(2L);
-        usuario.setNombre("Lucas2");
-        usuario.setApellido("Moy2");
-        usuario.setEmail("lucasmoy2@hotmail.com");
-        usuario.setTelefono("12");
-        usuarios.add(usuario);
+        return usuarioDao.getUsuarios();
+    }
 
-        usuario=new Usuario();
-        usuario.setId(3L);
-        usuario.setNombre("Lucas3");
-        usuario.setApellido("Moy3");
-        usuario.setEmail("lucasmoy3@hotmail.com");
-        usuario.setTelefono("23");
-        usuarios.add(usuario);
+    @RequestMapping(value="api/usuarios",method= RequestMethod.POST )
+    public void registrarUsuario(@RequestBody Usuario usuario){
 
-        return usuarios;
+        usuarioDao.registrar(usuario);
+    }
+
+    @RequestMapping(value="api/usuarios/{id}",method= RequestMethod.DELETE)
+    public void eliminarUsuario(@PathVariable Long id){
+        usuarioDao.eliminar(id);
     }
 }
