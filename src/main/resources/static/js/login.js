@@ -17,7 +17,9 @@ async function iniciarSesion(){
     body: JSON.stringify(datos)
   });
   const response = await request.text();
-  if(respuesta == "OK"){
+  if(respuesta != "FAIL"){
+    localStorage.token = respuesta;
+    localStorage.email = datos.email;
     window.location.href = 'usuarios.html'
   } else{
     alert("Las creedenciales son incorrectas");
