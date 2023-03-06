@@ -29,7 +29,7 @@ public class UsuarioController {
     @RequestMapping(value="api/usuarios",method= RequestMethod.GET )
     public List<Usuario> getUsuarios(@RequestHeader(value="Authorization")String token){
         if (!validarToken(token)){
-            return null;
+            return new ArrayList<>();
         }
         return usuarioDao.getUsuarios();
     }
@@ -37,7 +37,7 @@ public class UsuarioController {
         String usuarioId = jwtUtil.getKey(token);
         return usuarioId!=null;
     }
-    @RequestMapping(value="api/usuarios",method= RequestMethod.POST )
+    @RequestMapping(value="api/registro",method= RequestMethod.POST )
     public void registrarUsuario(@RequestBody Usuario usuario){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(1, 1024, 1, usuario.getPassword());
